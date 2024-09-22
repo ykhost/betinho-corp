@@ -700,13 +700,7 @@ services:
       - |
         /usr/local/spark/sbin/start-master.sh
         start-notebook.sh --NotebookApp.token=''
-      - apt-get update &&
-      - apt-get install -y openssh-server &&
-    user: root
-    networks:
-      - rede_interna
     ports:
-      - 22:22
       - 8889:8888
       - 4040:4040
       - 4041:4041
@@ -718,11 +712,10 @@ services:
       - ./spark/work:/home/user
       - ./spark/env:/env
       - ./util:/util
-      # - ./ssh_config:/etc/ssh
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 4g
 
   spark-worker:
     image: fjardim/mds-spark
@@ -740,10 +733,7 @@ services:
     #  PYSPARK_SUBMIT_ARGS: "--packages io.delta:delta-core_2.12:2.2.0,org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.12.392"
     env_file:
       - ./spark/env/jupyter.env
-    networks:
-      - rede_interna
     ports:
-      - 22:22
       - 5040:4040
       - 5041:4041
       - 5042:4042
@@ -760,7 +750,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1g
+          memory: 2g
 
 ##################################################
 ### GOVERNANCA
