@@ -40,7 +40,11 @@ def main():
     percentile_approx("distancia_km", 0.5).alias("media_distancia_km")
   ).sort(desc("media_velocidade_chegada")).limit(20)
 
-  df_velocidade_maior_40_LINHA = df_velocidade_maior_40.groupBy("LETREIRO_LINHA","LETREIRO_DESTINO_LINHA","LETREIRO_ORIGEM_LINHA").agg(
+  df_velocidade_maior_40_LINHA = df_velocidade_maior_40.groupBy(
+     "LETREIRO_LINHA",
+     "LETREIRO_DESTINO_LINHA",
+     "LETREIRO_ORIGEM_LINHA"
+    ).agg(
       percentile_approx("velocidade_para_chegar", 0.5).alias("media_velocidade_chegada"),
       percentile_approx("diff_in_minute", 0.5).alias("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),
       percentile_approx("distancia_km", 0.5).alias("media_distancia_km")
