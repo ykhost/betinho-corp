@@ -48,32 +48,32 @@ def main():
       percentile_approx("velocidade_para_chegar", 0.5).alias("media_velocidade_chegada"),
       percentile_approx("diff_in_minute", 0.5).alias("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),
       percentile_approx("distancia_km", 0.5).alias("media_distancia_km")
-  ).sort(desc("media_velocidade_chegada")).limit(20)
+  ).sort(desc("media_velocidade_chegada"))
 
   df_velocidade_maior_40_VEICULO = df_velocidade_maior_40.groupBy("ID_VEICULO").agg(
       percentile_approx("velocidade_para_chegar", 0.5).alias("media_velocidade_chegada"),
       percentile_approx("diff_in_minute", 0.5).alias("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),
       percentile_approx("distancia_km", 0.5).alias("media_distancia_km")
-  ).sort(desc("media_velocidade_chegada")).limit(20)
+  ).sort(desc("media_velocidade_chegada"))
 
 
   df_velocidade_menor_10_parada = df_velocidade_menor_10.groupBy("ID_PARADA","nome_parada").agg(
       percentile_approx("velocidade_para_chegar", 0.5).alias("media_velocidade_chegada"),
       percentile_approx("diff_in_minute", 0.5).alias("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),
       percentile_approx("distancia_km", 0.5).alias("media_distancia_km")
-  ).sort(desc("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),"media_velocidade_chegada").limit(20)
+  ).sort(desc("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),"media_velocidade_chegada")
 
   df_velocidade_menor_10_linha = df_velocidade_menor_10.groupBy("LETREIRO_LINHA","LETREIRO_DESTINO_LINHA","LETREIRO_ORIGEM_LINHA").agg(
       percentile_approx("velocidade_para_chegar", 0.5).alias("media_velocidade_chegada"),
       percentile_approx("diff_in_minute", 0.5).alias("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),
       percentile_approx("distancia_km", 0.5).alias("media_distancia_km")
-  ).sort(desc("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),"media_velocidade_chegada").limit(20)
+  ).sort(desc("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),"media_velocidade_chegada")
 
   df_velocidade_menor_10_VEICULO = df_velocidade_menor_10.groupBy("ID_VEICULO").agg(
       percentile_approx("velocidade_para_chegar", 0.5).alias("media_velocidade_chegada"),
       percentile_approx("diff_in_minute", 0.5).alias("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),
       percentile_approx("distancia_km", 0.5).alias("media_distancia_km_PONTOS")
-  ).sort(desc("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),"media_velocidade_chegada").limit(20)
+  ).sort(desc("MEDIA_DIFF_PREV_CHEGADA_MINUTOS"),"media_velocidade_chegada")
 
   tabela_maior_velocidade = "PREV_ATRASADO"
   tabela_maior_parada = f"{tabela_maior_velocidade}_PARADA"
